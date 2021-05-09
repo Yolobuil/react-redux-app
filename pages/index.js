@@ -5,9 +5,23 @@ const Cat = () =>{
   return <div>Meow!</div>
 }
 
+const User = (props) =>{
+return <div>Hi, I am {props.name}! and {props.age} years old!</div>
+}
+
+
+User.defaultProps = {
+  age: 1
+}
+
 export default function Home() {
   const greeting = "yaa";
   const dom = <h1> {greeting}</h1>; //h1がトランスパイルされてdomに代入されている
+  const profiles = [
+    { name: "Taro", age: 15},
+    { name: "Hanako", age: 2},
+    { name: "Hanako2"},
+  ]
 
   return (
     //JavaScript XML→JSX　JavaScriptの拡張言語。Reactを用いてHTMLを出力するための言語。
@@ -34,13 +48,20 @@ export default function Home() {
         <h1 className={styles.title}>
           <label>Hello</label>  <label className={styles.text}>World!</label>
         </h1>
-    <input type="text" onClick={() => {console.log("hello")}} />
+        {
+          profiles.map((profiles,index) => {
+            return <User name={profiles.name} age={profiles.age} key={index}/>
+          })
+        }
+
+    <input type="text" onClick={() => {console.log("hello見えてますか？")}} />
     <input type="text" onChange={() => { console.log("hello") }} />
     <label htmlFor="bar">bar</label>
       {dom}
       <Cat />
         <Cat />
         <Cat />
+        <User name={"a"} />
       </main>
 
       <footer className={styles.footer}>

@@ -38,3 +38,48 @@ facebookが開発し、facebook,slack,udemy,Qiita,NetFlix,Airbandbなどに使�
 
 仮想DOMという方式でDOMの変更箇所のみをレンダリングする機構を持っているため、高速
 JQueryがもたらしたDOMの変更箇所がどこか？と開発者が気にしなければならなかった問題の解消
+
+
+●Webpack
+モジュールバンドら
+ソースコードを束ねてブラウザで実行できる静的なJSファイルを出力
+複数npmを使用する場合必須
+AファイルをImportでBファイル内でを使用する場合
+Webpackl.config.js内のentryにBファイルを記入し、outputにC.jsファイルと記入すると、CファイルにAとBファイルがまとまる
+そのまとまったJSを他のjs内で使うことができる
+→複数のJSファイルをいちいちあるページに指定するのではなく、Webpackに記載してまとめることでoutputに書かれたファイルのみを記載して全てのjsファイルを使用できる
+
+ReactのアプリケーションでもWebpackを使用している。
+
+ブラウザの検証等でページを見たさいにsrc＝に書かれているファイル名がWebpack内のoutputに指定されたファイル（バンドルされたファイル）
+
+●Component
+ReactにはComponentというものがある
+①関数の定義によって作成するfunctionalコンポーネント
+②クラス定義によって作成するclassコンポーネント
+
+●props
+propsとはコンポーネントの属性のこと
+props.nameやprops.ageのようなあるデータの属性（名前、年齢）に対して、参照できるもののこと
+propsには数値や文字列、配列、オブジェクト、関数などなんでも使用することができる
+基本的には{}で囲ってpropsを渡していく
+function（User）の引数にpropsを入れ、その内部で{props.name(属性)というふうに記入}
+そのfunctionを使用する際に、User name={""}というふうに記入する
+1propsに複数個の属性を入れることができる
+User = (props) => {
+{props.name} {props.age}のように
+}
+
+reactで仮想DOMの変更時は変更点だけを実際のDOMに反映するが、それぞれのDOMにキーを与え、
+必要最低限なDOMの範囲をreactが管理している（つまり、DOMを指し示すキーを与える必要がある。）
+配列の場合は、引数に（配列,index） key={index}というふうにキーを与えるのがベストプラクティス
+
+deafultPropsについて
+propsを受け取るコンポーネントにdefaultPropsを設定する
+
+User.defaultProps = {
+  age: 1
+}
+のように内部のpropsをあらかじめ設定しておく。他function内部でageを指定されなかった場合は自動で１がはいる
+
+上記のように親のコンポーネントからこのコンポーネントにデータを渡したいとなった時に、propsを使ってデータを渡す。子コンポーネントはそれを参照して画面を描画する
