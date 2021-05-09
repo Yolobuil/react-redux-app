@@ -31,3 +31,10 @@ components/molecules
 src/components/templates/
   ページ全体のスケルトンになるUIコンポーネントを配置する。
   ページのアクセス制御やレイアウト等を含んだコンポーネント。
+
+
+React ->2013年に公開されたJSのライブラリ
+facebookが開発し、facebook,slack,udemy,Qiita,NetFlix,Airbandbなどに使われている
+
+仮想DOMという方式でDOMの変更箇所のみをレンダリングする機構を持っているため、高速
+JQueryがもたらしたDOMの変更箇所がどこか？と開発者が気にしなければならなかった問題の解消

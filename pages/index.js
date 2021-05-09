@@ -1,6 +1,10 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 
+const Cat = () =>{
+  return <div>Meow!</div>
+}
+
 export default function Home() {
   const greeting = "yaa";
   const dom = <h1> {greeting}</h1>; //h1がトランスパイルされてdomに代入されている
@@ -15,7 +19,12 @@ export default function Home() {
     //JSX内でのclassの指定通常class JSX上ではclassName(JSの予約語にclassがあるため)
     //reactは必ず１つのタグしか返せないが、不要なタグを返すことにもなる・・・
     //それを避けるために、<React.Fragment></React.Fragment>で囲うことで、実質１つのタグにできる。最終的には<React.Fragment>はきえる
-    <div className={styles.container}>
+    //JSXをJavaScriptに変換する作業のことをトランスパイリングという変換することをトランスパイル（ブラウザやnodeでは使えない）
+    //自動で内部的にかつ自動的に変換されている→Babelが自動的によしなにやっている
+    //様々な構文をBabelが標準的なJSに変換してくれる
+
+
+        <div className={styles.container}>
       <Head>
         <title>Create Next App</title>
         <link rel="icon" href="/favicon.ico" />
@@ -29,6 +38,9 @@ export default function Home() {
     <input type="text" onChange={() => { console.log("hello") }} />
     <label htmlFor="bar">bar</label>
       {dom}
+      <Cat />
+        <Cat />
+        <Cat />
       </main>
 
       <footer className={styles.footer}>
