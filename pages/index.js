@@ -1,5 +1,7 @@
 import Head from 'next/head'
+import { Component } from 'react'
 import styles from '../styles/Home.module.css'
+import Button from '@material-ui/core/Button'
 
 const Cat = () =>{
   return <div>Meow!</div>
@@ -12,6 +14,44 @@ return <div>Hi, I am {props.name}! and {props.age} years old!</div>
 
 User.defaultProps = {
   age: 1
+}
+
+class Counter extends Component {
+  constructor(props){
+super(props)
+console.log(this.state)
+this.state = {count:0}　//stateにはcountをキーとして、０を値とするオブジェクトが設定される。
+  }
+
+  handlePlusButton = () =>{
+console.log('handlePlusButton')
+console.log(this.state.count)
+ this.setState({ count: this.state.count + 1})
+
+  }
+
+  handleMinusButton = () => {
+    console.log('handleMlusButton')
+    console.log(this.state.count)
+    this.setState({ count: this.state.count - 1 }) //状態を変える時には必ずsetState
+
+  }
+
+
+
+
+render(){　//renderでdivの要素を描画する
+  console.log('render') //setStateが実行されると、そのコールバックにrenderが再実行される
+  return (
+    <>
+  <div>count: {this.state.count}</div>
+      <Button variant="contained" color="primary" onClick={this.handlePlusButton}>+1</Button>
+      <Button variant="contained" color="secondary" onClick={this.handleMinusButton
+      }>-1</Button>
+  </>
+  )
+}
+
 }
 
 export default function Home() {
@@ -53,6 +93,7 @@ export default function Home() {
             return <User name={profiles.name} age={profiles.age} key={index}/>
           })
         }
+        <Counter />
 
     <input type="text" onClick={() => {console.log("hello見えてますか？")}} />
     <input type="text" onChange={() => { console.log("hello") }} />
