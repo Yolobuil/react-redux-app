@@ -2,6 +2,10 @@ import Head from 'next/head'
 import { Component } from 'react'
 import styles from '../styles/Home.module.css'
 import Button from '@material-ui/core/Button'
+import {readEvents} from '../src/actions'
+import thunk from 'redux-thunk'
+import {applyMiddleware} from 'redux'
+import _ from 'lodash'
 
 const Cat = () =>{
   return <div>Meow!</div>
@@ -15,6 +19,8 @@ return <div>Hi, I am {props.name}! and {props.age} years old!</div>
 User.defaultProps = {
   age: 1
 }
+
+
 
 class Counter extends Component {
   constructor(props){
@@ -54,6 +60,67 @@ render(){　//renderでdivの要素を描画する
 
 }
 
+
+const store = createStore(reducer, applyMiddleware(thunk))
+class EventsIndex extends Component{
+  componentDidMout() {
+    this.props.readEvents()
+
+  }
+
+renderEvents(){
+  return _.map(this.props.events, event => (
+    <tr key={event.id}>
+      <td>
+        {event.id}
+      </td>
+      <td>
+        {event.title}
+      </td>
+      <td>
+        {event.body}
+      </td>
+    </tr>
+  ))
+}
+
+  render(){
+
+ return(
+
+     <table>
+<thead>
+<tr>
+<th>
+  ID
+</th>
+<th>
+  Title
+</th>
+<th>
+  Body
+</th>
+</tr>
+</thead>
+<tbody>
+  {this.renderEvents()}
+</tbody>
+     </table>
+
+
+ )
+
+  }
+
+}
+
+const mapStateToProps = state => ({events: state.events})
+
+
+//readEventsが外部のAPiサーバに対して、一覧を取得する役割を持っている
+const mapDispatchToProps = ({readEvents})
+
+
 export default function Home() {
   const greeting = "yaa";
   const dom = <h1> {greeting}</h1>; //h1がトランスパイルされてdomに代入されている
@@ -62,6 +129,8 @@ export default function Home() {
     { name: "Hanako", age: 2},
     { name: "Hanako2"},
   ]
+
+
 
   return (
     //JavaScript XML→JSX　JavaScriptの拡張言語。Reactを用いてHTMLを出力するための言語。
@@ -94,6 +163,7 @@ export default function Home() {
           })
         }
         <Counter />
+  {/*      <EventsIndex /> */}
 
     <input type="text" onClick={() => {console.log("hello見えてますか？")}} />
     <input type="text" onChange={() => { console.log("hello") }} />
